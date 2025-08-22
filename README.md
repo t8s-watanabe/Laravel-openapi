@@ -1,4 +1,5 @@
 # Laravel-openapi
+
 Laravel-openapi検証用
 
 ## OpenAPI ドキュメント生成パッケージ導入
@@ -7,7 +8,7 @@ Laravel-openapi検証用
 
 ### インストール
 
-```
+```bash
 composer require tartanlegrand/laravel-openapi
 ```
 
@@ -15,19 +16,19 @@ composer require tartanlegrand/laravel-openapi
 
 `config/app.php` の `providers` 配列に以下を追加：
 
-```
+```php
 Vyuldashev\LaravelOpenApi\OpenApiServiceProvider::class,
 ```
 
 ### 設定ファイルの公開
 
-```
+```bash
 php artisan vendor:publish --provider="Vyuldashev\LaravelOpenApi\OpenApiServiceProvider" --tag="openapi-config"
 ```
 
 ### OpenAPI ドキュメントの生成
 
-```
+```bash
 php artisan openapi:generate
 ```
 
@@ -36,4 +37,4 @@ php artisan openapi:generate
 - [公式ドキュメント](https://nova-edge.github.io/laravel-openapi/#installation)
 - [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md)
 - [Swagger Editor](https://editor.swagger.io/)
-Laravel-openapi検証用
+- Laravel-openapi検証用
