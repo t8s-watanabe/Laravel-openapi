@@ -1,0 +1,44 @@
+{
+    "name": "Laravel-openapi example devcontainer for laravel12",
+    "dockerComposeFile": [
+        "../compose.yml",
+        "./compose.devcontainer.yml"
+    ],
+    "service": "php_fpm",
+    "workspaceFolder": "/git/openapi",
+    // "features": {},
+    // "forwardPorts": [],
+    // "runServices": [],
+    "shutdownAction": "none",
+    // "postCreateCommand": "cat /etc/os-release",
+    "updateRemoteUserUID": false,
+    "remoteUser": "t8s",
+    "containerUser": "t8s",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-ceintl.vscode-language-pack-ja",
+                // php
+                "bmewburn.vscode-intelephense-client",
+                "junstyle.php-cs-fixer",
+                "xdebug.php-debug",
+                "xdebug.php-pack",
+                "neilbrayfield.php-docblocker",
+                // laravel
+                "laravel.vscode-laravel",
+                "onecentlin.laravel-extension-pack",
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "codingyu.laravel-goto-view",
+                "pgl.laravel-jump-controller",
+                // その他
+                "aaron-bond.better-comments",
+                "leodevbro.blockman"
+            ],
+            "settings": {
+                // php 実行パス
+                "php.executablePath": "/usr/local/bin/php",
+                "intelephense.environment.phpVersion": "8.3.0"
+            }
+        }
+    }
+}

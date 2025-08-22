@@ -1,0 +1,11 @@
+services:
+  php_fpm:
+    image: ${COMPOSE_PROJECT_NAME}-php_fpm:latest
+    volumes:
+      - ./laravel:/git/openapi:cached
+      - vscodeserver-extensions:/root/.vscode-server/extensions
+
+volumes:
+  vscodeserver-extensions:
+    name: vscodeserver-extensions
+    driver: local

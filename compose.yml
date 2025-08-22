@@ -1,0 +1,53 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./_docker
+      dockerfile: nginx.Dockerfile
+      args:
+        - ENVIRONMENT=local
+    volumes:
+      - ./laravel:/git/openapi
+    ports:
+      - "80:80"
+    networks:
+      - container-network
+    depends_on:
+      - 'php_fpm'
+    tty: true
+
+  php_fpm:
+    container_name: php_fpm
+    build:
+      context: ./_docker
+      dockerfile: php_fpm.Dockerfile
+    volumes:
+      - ./laravel:/git/openapi
+    networks:
+      - container-network
+
+  # データベース
+  database:
+    container_name: database
+    image: mysql:8.4
+    ports:
+      - ${DB_PORT:-3306}:3306
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: 'openapi'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      TZ: Asia/Tokyo
+    volumes:
+      - 'database_sql:/var/lib/mysql'
+    restart: always
+    networks:
+      - container-network
+
+volumes:
+  database_sql:
+    driver: local
+
+networks:
+  container-network:
+    driver: bridge
