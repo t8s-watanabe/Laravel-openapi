@@ -12,7 +12,7 @@
     "shutdownAction": "none",
     // "postCreateCommand": "cat /etc/os-release",
     "updateRemoteUserUID": false,
-    "remoteUser": "t8s",
+    "remoteUser": "root",
     "containerUser": "t8s",
     "customizations": {
         "vscode": {

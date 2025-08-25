@@ -5,6 +5,10 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * ユーザリソース
+ * プレゼンテーション層としての役割を担う(APIのレスポンスを整形)
+ */
 class UserResource extends JsonResource
 {
     /**

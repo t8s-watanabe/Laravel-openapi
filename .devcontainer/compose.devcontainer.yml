@@ -3,7 +3,7 @@ services:
     image: ${COMPOSE_PROJECT_NAME}-php_fpm:latest
     volumes:
       - ./laravel:/git/openapi:cached
-      - vscodeserver-extensions:/root/.vscode-server/extensions
+      - vscodeserver-extensions:/home/t8s/.vscode-server/extensions
 
 volumes:
   vscodeserver-extensions:

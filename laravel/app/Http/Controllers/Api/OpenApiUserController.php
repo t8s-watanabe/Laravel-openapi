@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 
-class UserController extends Controller
+/**
+ * OpenAPIの仕様書を生成するUserController
+ */
+class OpenApiUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return new UserCollection(User::paginate());
     }
 
     /**
@@ -27,10 +32,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        $user_resource = new UserResource(User::findOrFail($id));
-        return $user_resource;
+        return new UserResource($user);
     }
 
     /**
