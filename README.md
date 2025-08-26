@@ -56,9 +56,9 @@ php artisan migrate
 マイグレーション→Model→コントローラまでの実装はlaravel標準の手順参照。  
   
 **大まかな説明**  
-Http/Resources/: APIレスポンスの整形を行うクラスを置きます。コントローラはここで定義したリソースを返すことで、外部に公開するフィールドやキー名、ネスト構造、追加フィールドを統制します。
-OpenApi/Schemas/: OpenAPI 用のスキーマを Factory クラスで定義する場所です。`components/schemas` に出力される再利用可能な型をここで作ります。API リソース（UserResource 等）の出力形と一致させて定義すると差分が少なく保守しやすくなります。
-OpenApi/Responses/: HTTP ステータスごとの OpenAPI レスポンスを定義する Factory クラスを置きます。レスポンスの説明・コンテンツ・参照スキーマ（`UserSchema::ref()` 等）を定義し、コントローラのアトリビュートから参照されます。
+Http/Resources/: APIレスポンスの整形を行うクラスを置きます。コントローラはここで定義したリソースを返すことで、外部に公開するフィールドやキー名、ネスト構造、追加フィールドを統制します。  
+OpenApi/Schemas/: OpenAPI 用のスキーマを Factory クラスで定義する場所です。`components/schemas` に出力される再利用可能な型をここで作ります。API リソース（UserResource 等）の出力形と一致させて定義すると差分が少なく保守しやすくなります。  
+OpenApi/Responses/: HTTP ステータスごとの OpenAPI レスポンスを定義する Factory クラスを置きます。レスポンスの説明・コンテンツ・参照スキーマ（`UserSchema::ref()` 等）を定義し、コントローラのアトリビュートから参照されます。  
 
 ##### 1. APIリソースの作成
 
