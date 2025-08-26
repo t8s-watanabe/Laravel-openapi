@@ -37,10 +37,6 @@
     npm install
     ```
 
-### アプリケーションの実行
-
-アプリケーションは実行され、[http://localhost:8080](http://localhost:8080)でアクセスできます。
-
 ## 使用方法
 
 ### Artisanコマンド
@@ -61,7 +57,7 @@ php artisan migrate
 
 ##### Laravel-OpenAPI 関係図（簡潔）
 
-```
+```txt
 App\Http\Controllers\Api\OpenApiUserController
     ├─ uses -> App\Models\User
     ├─ returns -> App\Http\Resources\UserResource (show)
@@ -93,7 +89,7 @@ php artisan make:resource UserResource
 php artisan make:resource UserCollection
 ```
 
-`UserResource`の実装：
+`UserResource`の実装：  
 `UserResource`の必要性 → APIの「公開契約」を定義するための重要なステップです。Eloquentモデルを直接返すと、データベースの構造（カラム名など）が外部にそのまま公開されてしまいます。  
 UserResourceはモデルと最終的なJSONレスポンスの間に「変換レイヤー」を設けることで、公開したいデータだけを選択し、キーの名前を変更し、さらには追加のデータを付与することを可能にします 。
 
@@ -119,7 +115,7 @@ class UserResource extends JsonResource
 }
 ```
 
-`UserCollection`の実装：
+`UserCollection`の実装：  
 `UserCollection`の必要性 → 単一のリソース（UserResource）が個々のユーザーデータを整形するのに対し、UserCollectionはユーザーのリスト、特にページネーションされた結果を扱うために特化しています。  
 これにより、dataキーでユーザーリストをラップするだけでなく、ページネーション情報（linksやmetaなど）をレスポンスに含めることが可能になります 。個別のリソースコレクションクラスを用意することで、コレクション全体に関連するメタデータを柔軟に追加できるようになります。
 
@@ -151,7 +147,7 @@ class UserCollection extends ResourceCollection
 php artisan openapi:make-schema UserSchema
 ```
 
-`UserSchema`の実装：
+`UserSchema`の実装：  
 
 ```php
 // app/OpenApi/Schemas/UserSchema.php
@@ -200,7 +196,7 @@ php artisan openapi:make-response UserCollectionResponse
 php artisan openapi:make-response NotFoundResponse
 ```
 
-`UserResponse`の実装：
+`UserResponse`の実装：  
 
 ```php
 // app/OpenApi/Responses/UserResponse.php
@@ -223,7 +219,7 @@ class UserResponse extends ResponseFactory
 }
 ```
 
-`UserCollectionResponse`の実装：
+`UserCollectionResponse`の実装：  
 
 ```php
 // app/OpenApi/Responses/UserCollectionResponse.php
@@ -263,7 +259,7 @@ class UserCollectionResponse extends ResponseFactory
 }
 ```
 
-`NotFoundResponse`の実装：
+`NotFoundResponse`の実装：  
 
 ```php
 // app/OpenApi/Responses/NotFoundResponse.php
