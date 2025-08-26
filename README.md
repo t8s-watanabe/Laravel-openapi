@@ -53,33 +53,12 @@ php artisan migrate
 
 #### 開発手順
 
-マイグレーション→Model→コントローラまでの実装はlaravel標準の手順参照。
-
-##### Laravel-OpenAPI 関係図（簡潔）
-
-```txt
-App\Http\Controllers\Api\OpenApiUserController
-    ├─ uses -> App\Models\User
-    ├─ returns -> App\Http\Resources\UserResource (show)
-    ├─ returns -> App\Http\Resources\UserCollection (index)
-    ├─ OpenAPI 200 -> App\OpenApi\Responses\UserResponse
-    │     └─ references -> App\OpenApi\Schemas\UserSchema
-    ├─ OpenAPI 200 (collection) -> App\OpenApi\Responses\UserCollectionResponse
-    │     └─ references -> App\OpenApi\Schemas\UserSchema
-    └─ OpenAPI 404 -> App\OpenApi\Responses\NotFoundResponse
-
-App\OpenApi\Schemas\UserSchema
-    └─ defines -> User object schema (id, name, email, created_at, updated_at)
-
-App\OpenApi\Responses\UserResponse
-    └─ content -> UserSchema::ref()
-
-App\OpenApi\Responses\UserCollectionResponse
-    └─ content -> { data: [ UserSchema::ref() ], links, meta }
-
-App\OpenApi\Responses\NotFoundResponse
-    └─ defines -> 404 response
-```
+マイグレーション→Model→コントローラまでの実装はlaravel標準の手順参照。  
+  
+**大まかな説明**  
+Http/Resources/: APIレスポンスの整形を行うクラスを置きます。コントローラはここで定義したリソースを返すことで、外部に公開するフィールドやキー名、ネスト構造、追加フィールドを統制します。
+OpenApi/Schemas/: OpenAPI 用のスキーマを Factory クラスで定義する場所です。`components/schemas` に出力される再利用可能な型をここで作ります。API リソース（UserResource 等）の出力形と一致させて定義すると差分が少なく保守しやすくなります。
+OpenApi/Responses/: HTTP ステータスごとの OpenAPI レスポンスを定義する Factory クラスを置きます。レスポンスの説明・コンテンツ・参照スキーマ（`UserSchema::ref()` 等）を定義し、コントローラのアトリビュートから参照されます。
 
 ##### 1. APIリソースの作成
 
