@@ -143,8 +143,52 @@ class UserCollection extends ResourceCollection
 ##### 2. OpenAPIスキーマの作成
 
 ```bash
-# スキーマファクトリの生成
+php artisan openapi:make-schema UserCollectionSchema
 php artisan openapi:make-schema UserSchema
+```
+
+`UserCollectionSchema`の実装：  
+
+```php
+// app/OpenApi/Schemas/UserCollectionSchema.php
+namespace App\OpenApi\Schemas;
+
+use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AnyOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Not;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
+use Vyuldashev\LaravelOpenApi\Factories\SchemaFactory;
+use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
+
+class UserCollectionSchema extends SchemaFactory implements Reusable
+{
+    /**
+     * @return AllOf|OneOf|AnyOf|Not|Schema
+     */
+    public function build(): SchemaContract
+    {
+        return Schema::object('Users')->properties(
+            Schema::array('data')->items(UserSchema::ref()),
+            Schema::object('links')->properties(
+                Schema::string('first')->nullable(),
+                Schema::string('last')->nullable(),
+                Schema::string('prev')->nullable(),
+                Schema::string('next')->nullable()
+            ),
+            Schema::object('meta')->properties(
+                Schema::integer('current_page'),
+                Schema::integer('from')->nullable(),
+                Schema::integer('last_page'),
+                Schema::string('path'),
+                Schema::integer('per_page'),
+                Schema::integer('to')->nullable(),
+                Schema::integer('total')
+            )
+        );
+    }
+}
 ```
 
 `UserSchema`の実装：  
@@ -154,12 +198,19 @@ php artisan openapi:make-schema UserSchema
 namespace App\OpenApi\Schemas;
 
 use GoldSpecDigital\ObjectOrientedOAS\Contracts\SchemaContract;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AllOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\AnyOf;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Not;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 use Vyuldashev\LaravelOpenApi\Factories\SchemaFactory;
 
 class UserSchema extends SchemaFactory implements Reusable
 {
+    /**
+     * @return AllOf|OneOf|AnyOf|Not|Schema
+     */
     public function build(): SchemaContract
     {
         return Schema::object('User')
