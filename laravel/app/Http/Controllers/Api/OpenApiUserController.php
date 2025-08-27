@@ -14,6 +14,7 @@ use App\OpenApi\Responses\UserCollectionResponse;
 use App\OpenApi\Responses\UserResponse;
 use App\OpenApi\Responses\ValidationErrorResponse;
 use App\OpenApi\RequestBodies\StoreUserRequestBody;
+use App\OpenApi\Parameters\AcceptHeaderParameters;
 
 /**
  * OpenAPIの仕様書を生成するUserController
@@ -34,9 +35,12 @@ class OpenApiUserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新しいユーザーデータを作成
+     *
+     * @param Accept application/json
      */
     #[OpenApi\Operation(tags: ['Users'])]
+    #[OpenApi\Parameters(factory: AcceptHeaderParameters::class)]
     #[OpenApi\RequestBody(factory: StoreUserRequestBody::class)]
     #[OpenApi\Response(factory: UserResponse::class, statusCode: 201)]
     #[OpenApi\Response(factory: ValidationErrorResponse::class, statusCode: 422)]

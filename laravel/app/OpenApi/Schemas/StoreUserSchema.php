@@ -9,8 +9,9 @@ use GoldSpecDigital\ObjectOrientedOAS\Objects\Not;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\OneOf;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Schema;
 use Vyuldashev\LaravelOpenApi\Factories\SchemaFactory;
+use Vyuldashev\LaravelOpenApi\Contracts\Reusable;
 
-class StoreUserSchema extends SchemaFactory
+class StoreUserSchema extends SchemaFactory implements Reusable
 {
     /**
      * @return AllOf|OneOf|AnyOf|Not|Schema

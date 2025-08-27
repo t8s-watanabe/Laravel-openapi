@@ -12,7 +12,7 @@ class UserResponse extends ResponseFactory
     public function build(): Response
     {
         // 200レスポンスを定義し、そのコンテンツとして作成したUserSchemaを参照
-        return Response::ok()->description('Successful response')
+        return Response::ok()->description('成功時のレスポンス')
             ->content(
                 MediaType::json()->schema(UserSchema::ref())
             );

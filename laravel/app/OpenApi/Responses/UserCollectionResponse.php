@@ -14,7 +14,7 @@ class UserCollectionResponse extends ResponseFactory
 {
     public function build(): Response
     {
-        return Response::ok()->description('Successful response')
+        return Response::ok()->description('成功時のレスポンス')
             ->content(MediaType::json()->schema(UserCollectionSchema::ref()));
     }
 }

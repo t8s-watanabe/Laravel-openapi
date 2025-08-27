@@ -12,7 +12,7 @@ class ValidationErrorResponse extends ResponseFactory
     public function build(): Response
     {
         return Response::unprocessableEntity()
-            ->description('Validation failed')
+            ->description('バリデーションエラー')
             ->content(
                 MediaType::json()->schema(ValidationErrorSchema::ref())
             );
