@@ -20,6 +20,7 @@ class StoreUserSchema extends SchemaFactory
         return Schema::object('StoreUser')
             ->properties(
                 Schema::string('name')
+                    ->format(Schema::TYPE_STRING)
                     ->description('ユーザーのフルネーム')
                     ->example('山田 太郎'),
                 Schema::string('email')
