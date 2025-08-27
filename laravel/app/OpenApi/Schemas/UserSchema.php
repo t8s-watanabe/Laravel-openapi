@@ -41,7 +41,6 @@ class UserSchema extends SchemaFactory implements Reusable
                     ->format(Schema::FORMAT_DATE_TIME)
                     ->description('更新日時')
                     ->example('2024-01-01T13:00:00Z')
-            )
-            ->required('id', 'name', 'email', 'created_at', 'updated_at');
+            );
     }
 }

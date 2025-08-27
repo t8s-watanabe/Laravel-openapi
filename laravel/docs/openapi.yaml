@@ -19,11 +19,62 @@
                 "summary": "ユーザーデータの一覧を取得",
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "成功時のレスポンス",
                         "content": {
                             "application\/json": {
                                 "schema": {
                                     "$ref": "#\/components\/schemas\/Users"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "新しいユーザーデータを作成",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "レスポンスのフォーマットを指定します。通常は \"application\/json\" を使用します。",
+                        "required": true,
+                        "schema": {
+                            "default": "application\/json",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "ユーザー作成のためのリクエストボディ",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/StoreUser"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "成功時のレスポンス",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/User"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "バリデーションエラー",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "$ref": "#\/components\/schemas\/ValidationError"
                                 }
                             }
                         }
@@ -49,7 +100,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
+                        "description": "成功時のレスポンス",
                         "content": {
                             "application\/json": {
                                 "schema": {
@@ -59,7 +110,7 @@
                         }
                     },
                     "404": {
-                        "description": "Resource not found"
+                        "description": "リソースが見つかりません"
                     }
                 }
             }
@@ -67,6 +118,54 @@
     },
     "components": {
         "schemas": {
+            "ValidationError": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "description": "エラーメッセージ",
+                        "type": "string",
+                        "example": "The given data was invalid."
+                    },
+                    "errors": {
+                        "description": "フィールドごとのエラー一覧（各プロパティは文字列配列）",
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "StoreUser": {
+                "type": "object",
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "ユーザーのフルネーム",
+                        "format": "string",
+                        "type": "string",
+                        "example": "山田 太郎"
+                    },
+                    "email": {
+                        "description": "有効なメールアドレス",
+                        "format": "string",
+                        "type": "string",
+                        "example": "taro.yamada@example.com"
+                    },
+                    "password": {
+                        "description": "パスワード（8文字以上）",
+                        "format": "password",
+                        "type": "string",
+                        "example": "password123"
+                    }
+                }
+            },
             "Users": {
                 "type": "object",
                 "properties": {
@@ -129,13 +228,6 @@
             },
             "User": {
                 "type": "object",
-                "required": [
-                    "id",
-                    "name",
-                    "email",
-                    "created_at",
-                    "updated_at"
-                ],
                 "properties": {
                     "id": {
                         "description": "ユーザーID",
