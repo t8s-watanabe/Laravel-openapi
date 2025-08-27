@@ -9,7 +9,7 @@ class NotFoundResponse extends ResponseFactory
 {
     public function build(): Response
     {
-        return Response::notFound()->description('Resource not found');
+        return Response::notFound()->description('リソースが見つかりません');
 
     }
 }
