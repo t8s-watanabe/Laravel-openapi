@@ -38,7 +38,7 @@ class OpenApiUserController extends Controller
      */
     #[OpenApi\Operation(tags: ['Users'])]
     #[OpenApi\RequestBody(factory: StoreUserRequestBody::class)]
-    #[OpenApi\Response(factory: UserResponse::class, statusCode: 200)]
+    #[OpenApi\Response(factory: UserResponse::class, statusCode: 201)]
     #[OpenApi\Response(factory: ValidationErrorResponse::class, statusCode: 422)]
     public function store(StoreUserRequest $request)
     {
