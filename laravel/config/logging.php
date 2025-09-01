@@ -63,6 +63,8 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
+            'formatter' => Monolog\Formatter\JsonFormatter::class,
+            'tap' => [App\Logging\CustomizeFormatter::class],
         ],
 
         'daily' => [

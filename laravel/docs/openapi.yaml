@@ -226,6 +226,21 @@
                     }
                 }
             },
+            "InternalServerError": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "description": "汎用エラーメッセージ",
+                        "type": "string",
+                        "example": "Internal Server Error"
+                    },
+                    "errorId": {
+                        "description": "ログ照会用のエラー識別子（サポート用）",
+                        "type": "string",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    }
+                }
+            },
             "User": {
                 "type": "object",
                 "properties": {
